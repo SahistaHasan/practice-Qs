@@ -21,3 +21,13 @@
 	<li><code>1 &lt;= s.length, goal.length &lt;= 100</code></li>
 	<li><code>s</code> and <code>goal</code> consist of lowercase English letters.</li>
 </ul>
+
+
+
+
+# Intuition
+The key insight is that when you concatenate a string with itself (s + s),
+it contains all possible rotations of the original string.
+
+For example, if s = "abcde", then s + s = "abcdeabcde"
+contains all rotations: "abcde", "bcdea", "cdeab", "deabc", "eabcd".
