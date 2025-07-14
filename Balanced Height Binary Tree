@@ -1,0 +1,23 @@
+class Solution {
+
+     public int max(TreeNode root,int count) {
+        
+     if(root==null) return 0;
+     int left=max(root.left,count);
+     if(left==-1) return -1;
+     int right = max(root.right,count);
+     if(right==-1) return -1;
+     count++;
+     if(Math.abs(left-right)>1){
+        return -1;
+     }
+     return count+Math.max(left,right);
+
+    }
+    public boolean isBalanced(TreeNode root) {
+        int count=0;
+        int ene = max(root,count);
+        if (ene ==-1) return false;
+        else return true;
+}
+}
