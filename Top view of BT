@@ -1,0 +1,43 @@
+class Pair{
+     Node node;
+     int line;
+     
+     Pair(Node node, int line){
+         this.node = node;
+         this.line = line;
+     }
+}
+
+class Solution {
+  
+    static ArrayList<Integer> topView(Node root) {
+        
+        Map<Integer,Integer> map = new TreeMap<>(); //key=verticalline value=nodevalue
+        Queue<Pair> que = new LinkedList<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        que.add(new Pair(root,0));
+        while(!que.isEmpty()){
+            int n = que.size();
+            for(int i=0;i<n;i++){
+               Node pulled = que.peek().node;
+               int vert = que.peek().line;
+               que.poll();
+               if(!map.containsKey(vert)){
+                     map.put(vert,pulled.data);
+               }
+               if( pulled.left!=null){
+                   que.add(new Pair(pulled.left,vert-1));
+               }
+               if( pulled.right!=null){
+                   que.add(new Pair(pulled.right,vert+1));
+               }
+             
+                
+            }
+        }
+        for (Map.Entry<Integer,Integer> e:map.entrySet()){
+            list.add(e.getValue());
+        }
+        return list;
+    }
+}
