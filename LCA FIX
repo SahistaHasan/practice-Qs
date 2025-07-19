@@ -1,0 +1,71 @@
+ Given the root of a binary tree, return the maximum width of the given tree.
+
+The maximum width of a tree is the maximum width among all levels.
+
+The width of one level is defined as the length between the end-nodes (the leftmost and rightmost non-null nodes), where the null nodes between the end-nodes that would be present in a complete binary tree extending down to that level are also counted into the length calculation.
+
+It is guaranteed that the answer will in the range of a 32-bit signed integer. 
+
+
+
+
+
+class Solution {
+    List<TreeNode> listp = new ArrayList<>();
+    List<TreeNode> listq = new ArrayList<>();
+    boolean foundp=false;
+    boolean foundq=false;
+    public void pcall(TreeNode root, TreeNode p) {
+       
+      if(root == null) return;
+       listp.add(root);
+      if(root==p) {
+        foundp=true;
+        return;
+      }
+     pcall(root.left,p);
+     if(foundp==true) return;
+    
+     pcall(root.right,p);
+    if(foundp==true){
+        return;
+    }
+   
+     listp.remove(listp.size()-1);
+     return;
+    }
+    
+     public void qcall(TreeNode root, TreeNode q) {
+       
+      if(root == null) return;
+       listq.add(root);
+      if(root==q) {
+        foundq=true;
+        return;
+      }
+     qcall(root.left,q);
+     if(foundq==true) return;
+     
+     qcall(root.right,q);
+    if(foundq==true){
+        return;
+    }
+    
+     listq.remove(listq.size()-1);
+     return;
+    }
+    
+
+     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q){
+        
+      pcall(root, p);
+      qcall(root, q);
+
+      
+      int i = 0;
+        while (i < listp.size() && i < listq.size() && listp.get(i) == listq.get(i)) {
+            i++;
+        }
+      return listp.get(i-1);
+     }
+}
