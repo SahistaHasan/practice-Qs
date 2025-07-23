@@ -7,22 +7,23 @@ class Solution {
         if (count < 0) return false;
         if (index == s.length()) return count == 0;
 
+       
         String key = index + "," + count;
         if (memo.containsKey(key)) return memo.get(key);
 
-        char ch = s.charAt(index);
         boolean result;
-
-        if (ch == '(') {
+        if (s.charAt(index) == '(') {
             result = recurse(s, index + 1, count + 1);
-        } else if (ch == ')') {
+        } else if (s.charAt(index) == ')') {
             result = recurse(s, index + 1, count - 1);
-        } else { // '*'
-            result = recurse(s, index + 1, count + 1) ||   // as '('
-                     recurse(s, index + 1, count - 1) ||   // as ')'
-                     recurse(s, index + 1, count);         // as empty
+        } else {
+            boolean add = recurse(s, index + 1, count + 1);
+            boolean sub = recurse(s, index + 1, count - 1);
+            boolean none = recurse(s, index + 1, count);
+            result = add || sub || none;
         }
 
+        
         memo.put(key, result);
         return result;
     }
