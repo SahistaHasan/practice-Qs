@@ -9,10 +9,11 @@ class Solution {
             }
             return;
     }
-    
-    subsets(nums,index+1,max,res|nums[index]);
-    
+    int curr=res;
+    res=res|nums[index];
     subsets(nums,index+1,max,res);
+    
+    subsets(nums,index+1,max,curr);
     return;
 
     }
