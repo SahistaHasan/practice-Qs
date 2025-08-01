@@ -1,21 +1,25 @@
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
         int count = 0;
-        int prefixSum = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1); // prefix sum 0 occurs once initially
+        int odd = 0;
+        int i = 0;
+        int prefix = 0;  // counts how many valid start positions we have
 
-        for (int num : nums) {
-            int val = (num % 2 == 0) ? 0 : 1; // convert even → 0, odd → 1
-            prefixSum += val;
-
-            // check if there's a prefix with sum (prefixSum - k)
-            if (map.containsKey(prefixSum - k)) {
-                count += map.get(prefixSum - k);
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] % 2 != 0) {
+                odd++;
+                prefix = 0;  // reset prefix count whenever a new odd is added
             }
 
-            // record this prefix sum
-            map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
+            while (odd == k) {
+                if (nums[i] % 2 != 0) {
+                    odd--;
+                }
+                prefix++;
+                i++;
+            }
+
+            count += prefix; // add all valid subarrays ending at j
         }
 
         return count;
