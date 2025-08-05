@@ -29,3 +29,9 @@
 <ul>
 	<li><code>1 &lt;= m, n &lt;= 100</code></li>
 </ul>
+
+
+
+
+solution hint-:
+<img width="947" height="600" alt="image" src="https://github.com/user-attachments/assets/bff3360d-4f27-4d4e-a3fb-519838b2cb59" />
