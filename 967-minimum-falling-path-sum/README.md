@@ -22,6 +22,9 @@
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
+
+<h1>Tip: In such type of DP/Recursion problme we always need a valid start point. Thats why in the main function we are looping over all the columns in first row to have a valid starting point.</h1>
+
 <ul>
 	<li><code>n == matrix.length == matrix[i].length</code></li>
 	<li><code>1 &lt;= n &lt;= 100</code></li>
