@@ -16,7 +16,7 @@ class Solution {
             sb.append(num.charAt(j));
             
             String current = sb.toString();
-                if (maxStr.equals("") || current.compareTo(maxStr) > 0) {
+                if ( current.compareTo(maxStr) > 0) {
                     maxStr = current;  // update max
                 }
         }
