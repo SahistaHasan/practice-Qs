@@ -2,6 +2,7 @@ class Solution {
     public String multiply(String num1, String num2) {
         if(num1.equals("0") || num2.equals("0")) return "0";
         StringBuilder sb = new StringBuilder();
+        int finalindex=0;
         int [] arr = new int[num1.length()+num2.length()];
         
         for(int i=num1.length()-1;i>=0;i--){
@@ -15,11 +16,14 @@ class Solution {
                int b = num2.charAt(j)-'0';
                 mul=a*b;
                 mul2=(mul+carry+arr[i+j+1]);
-                 
                 arr[i+j+1]=mul2%10;
-               arr[i + j] +=  mul2/ 10;
+                carry=mul2/10;
+                if(i==0){
+                   finalindex=j;
+                }
                
             }
+            arr[i+finalindex]=carry;
            
             
         }
