@@ -8,7 +8,7 @@ class Solution {
    }
    for(int i=2;i<=Math.sqrt(n);i++){
     if(primeno[i]==1){
-    for(int j=i*i;j<=n;j+=i){
+    for(int j=i+i;j<=n;j+=i){
        primeno[j]=0;
     }
    }
