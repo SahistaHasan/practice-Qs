@@ -16,7 +16,7 @@ class Solution {
             for(int j=0;j<curr.length();j++){
                 char c = curr.charAt(j);
             for(char i='a';i<='z';i++){
-                if(i==c) continue;
+                
                 StringBuilder sb = new StringBuilder(curr);
                 sb.setCharAt(j,i);
                 String changed = sb.toString();
