@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class GraphCycleDetection {
+    private int V;                      // number of vertices
+    private List<List<Integer>> adj;    // adjacency list
+
+    public GraphCycleDetection(int vertices) {
+        this.V = vertices;
+        adj = new ArrayList<>(vertices);
+        for (int i = 0; i < vertices; i++) {
+            adj.add(new ArrayList<>());
+        }
+    }
+
+    // Add an undirected edge
+    public void addEdge(int u, int v) {
+        adj.get(u).add(v);
+        adj.get(v).add(u);
+    }
+
+    // Main DFS function to detect cycle
+    private boolean dfs(int node, boolean[] visited, int parent) {
+        visited[node] = true;
+
+        for (int neighbor : adj.get(node)) {
+            if (!visited[neighbor]) {
+                // If neighbor not visited, recurse
+                if (dfs(neighbor, visited, node)==true) {
+                    return true;  // cycle found in subtree
+                }
+            } 
+            // If neighbor is visited and not parent → cycle
+            else if (neighbor != parent) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Check all components (in case graph is disconnected)
+    public boolean hasCycle() {
+        boolean[] visited = new boolean[V];
+
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                if (dfs(i, visited, -1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
