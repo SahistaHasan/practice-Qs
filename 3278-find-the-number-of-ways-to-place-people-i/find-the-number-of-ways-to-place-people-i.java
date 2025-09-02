@@ -10,7 +10,7 @@ class Solution {
             for(int j=i+1;j<points.length;j++){
                 if(points[i][0]<=points[j][0] && points[j][1]<=points[i][1]){
                     found=false;
-                      for(int p= 0; p < points.length; p++) {
+                      for(int p= i+1; p <j; p++) {
                         if (p == i || p == j) continue;
                         if(points[p][0]<=points[j][0] && points[p][0]>=points[i][0] && points[p][1]<=points[i][1] && points[p][1]>=points[j][1]){
                            found=true;
