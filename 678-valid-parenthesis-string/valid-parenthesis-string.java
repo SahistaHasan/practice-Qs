@@ -1,34 +1,40 @@
-import java.util.*;
-
 class Solution {
-    Map<String, Boolean> memo = new HashMap<>();
-
-    public boolean recurse(String s, int index, int count) {
-        if (count < 0) return false;
-        if (index == s.length()) return count == 0;
-
-       
-        String key = index + "," + count;
-        if (memo.containsKey(key)) return memo.get(key);
-
-        boolean result;
-        if (s.charAt(index) == '(') {
-            result = recurse(s, index + 1, count + 1);
-        } else if (s.charAt(index) == ')') {
-            result = recurse(s, index + 1, count - 1);
-        } else {
-            boolean add = recurse(s, index + 1, count + 1);
-            boolean sub = recurse(s, index + 1, count - 1);
-            boolean none = recurse(s, index + 1, count);
-            result = add || sub || none;
+    Map<String,Boolean> map = new HashMap<>();
+    public boolean recurse( int index,int close,int open,String s){
+        if(close>open) return false;
+        if(index>=s.length()){
+            if(open==close) return true;
+            else return false;
         }
-
-        
-        memo.put(key, result);
-        return result;
+        boolean res=true;
+         String sb = index + "," + open + "," + close;
+        if(map.containsKey(sb)) return map.get(sb);
+        if(s.charAt(index)=='('){
+            
+            open++;
+          res=  recurse(index+1,close,open,s);
+        }
+        else if(s.charAt(index)==')'){
+            
+            close++;
+           res= recurse(index+1,close,open,s);
+        }
+        else{
+            
+         boolean op=  recurse(index+1,close,open+1,s);
+            
+         boolean  cl= recurse(index+1,close+1,open,s);
+            
+          boolean none= recurse(index+1,close,open,s);
+            res=op||cl||none;
+            
+            
+        }
+        map.put(sb,res);
+        return res;
     }
-
     public boolean checkValidString(String s) {
-        return recurse(s, 0, 0);
+         
+        return recurse(0,0,0,s);
     }
 }
