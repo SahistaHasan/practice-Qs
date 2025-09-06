@@ -1,6 +1,6 @@
 class Solution {
     public boolean dfs(boolean[] vis,boolean [] path,int i, List<List<Integer>> list){
-        if(path[i]) return true;
+        if(path[i] && vis[i]) return true;
         if(vis[i]) return false;
         
         vis[i]=true;
