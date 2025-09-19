@@ -8,7 +8,7 @@ class Solution {
         
        int i=0;
         while(i<nums.length){
-            if(i!=0 && i<nums.length && nums[i]==nums[i-1] && !vis[i - 1]){
+            while(i!=0 && i<nums.length && nums[i]==nums[i-1] && !vis[i - 1]){
                 i++;
                 continue;
             }
