@@ -23,6 +23,7 @@ class Pair{
          int currx=p.x;
          int curry=p.y;
          int currdif=p.dist;
+         if(currx==heights.length-1 && curry ==heights[0].length) return currdif;
          for(int i=0;i<4;i++){
             int _x=currx+drow[i];
             int _y=curry+dcol[i];
