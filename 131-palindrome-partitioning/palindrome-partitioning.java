@@ -1,10 +1,10 @@
 class Solution {
     List<List<String>> list = new ArrayList<>();
     public boolean palindrome(String s, int start, int end){
-        StringBuilder sb = new StringBuilder();
-        sb.append(s.substring(start,end+1));
-        if (sb.toString().equals(sb.reverse().toString())) return true;
-        else return false;
+       while(start <= end){
+           if(s.charAt(start++) != s.charAt(end--)) return false;
+        }
+        return true;
     }
     public void recurse(String s, int index,List<String> inner){
       if(index==s.length()){
