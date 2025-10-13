@@ -1,16 +1,22 @@
 class Solution {
     public boolean anagram(String s1, String s2){
         if(s1.length()!=s2.length()) return false;
-        Map<Character,Integer> map1 = new HashMap<>();
-        Map<Character,Integer> map2= new HashMap<>();
-        for(int i=0;i<s1.length();i++){
-            map1.put(s1.charAt(i),map1.getOrDefault(s1.charAt(i),0)+1);
-            map2.put(s2.charAt(i),map2.getOrDefault(s2.charAt(i),0)+1);
-        }
-        for(Map.Entry<Character,Integer> e:map1.entrySet()){
-            if(!map2.containsKey(e.getKey())) return false;
-            if(!e.getValue().equals(map2.get(e.getKey()))) return false;
-        }
+        char[] chars = s1.toCharArray();
+
+        // Sort the array
+        Arrays.sort(chars);
+
+        // Convert back to string
+        String sorted1 = new String(chars);
+         char[] chars2 = s2.toCharArray();
+
+        // Sort the array
+        Arrays.sort(chars2);
+
+        // Convert back to string
+        String sorted2 = new String(chars2);
+        if(!sorted1.equals(sorted2)) return false;
+
         return true;
     }
     public List<String> removeAnagrams(String[] words) {
