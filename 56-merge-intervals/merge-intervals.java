@@ -1,7 +1,10 @@
 class Solution {
     public int[][] merge(int[][] intervals) {
         List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+        Arrays.sort(intervals,(a,b)->{
+            if(a[0]==b[0]) return a[1]-b[1];
+            return a[0]-b[0];
+        });
         int start=intervals[0][0];
         int end=intervals[0][1];
         for(int j=1;j<intervals.length;j++){
