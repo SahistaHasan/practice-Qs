@@ -4,7 +4,7 @@ class Solution {
         int idx=0;
         Deque<Integer> que = new ArrayDeque<>();
         for(int i=0;i<nums.length;i++){
-            if(!que.isEmpty() && que.peek()<=i-k){
+            while(!que.isEmpty() && que.peek()<=i-k){
                 que.poll();
             }
             while(!que.isEmpty() && nums[que.peekLast()]<=nums[i]){
