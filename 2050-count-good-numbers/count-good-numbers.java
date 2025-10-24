@@ -2,7 +2,7 @@ class Solution {
     public int power(int base, long pow) {
         int MOD = 1000000007;
         long ans = 1;
-        long b = base % MOD;
+        long b = base ;
 
         while (pow != 0) {
             if (pow % 2 == 0) {
