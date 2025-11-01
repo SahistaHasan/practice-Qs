@@ -1,21 +1,30 @@
 class Solution {
     public int[] findMissingAndRepeatedValues(int[][] grid) {
-        int sum=0;
-        int repeated=0;
-        Map <Integer,Integer> map = new HashMap<>();
-        for(int i=0;i<grid.length;i++){
-            for(int j=0;j<grid[0].length;j++){
-                sum=sum+grid[i][j];
-                map.put(grid[i][j],map.getOrDefault(grid[i][j],0)+1);
-                if(map.get(grid[i][j])>1){
-                    repeated=grid[i][j];
-                }
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int N = rows * cols;
+
+        long expectedSum = (long) N * (N + 1) / 2L;
+        long expectedSquareSum = (long) N * (N + 1) * (2L * N + 1) / 6L;
+
+        long actualSum = 0L;
+        long actualSquareSum = 0L;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int val = grid[i][j];
+                actualSum += val;
+                actualSquareSum += (long) val * val;
             }
         }
-        int [] arr = new int[2];
-        arr[0]=repeated;
-        int n=grid[0].length*grid[0].length;
-        arr[1]=((n)*(n+1))/2 -(sum-repeated);
-        return arr;
+
+        long diff1 = actualSum - expectedSum;           // x - y
+        long diff2 = actualSquareSum - expectedSquareSum; // x^2 - y^2
+
+        long sumXY = diff2 / diff1;                     // x + y
+        long repeated = (sumXY + diff1) / 2;            // x
+        long missing = repeated - diff1;                // y
+
+        return new int[] { (int) repeated, (int) missing };
     }
 }
