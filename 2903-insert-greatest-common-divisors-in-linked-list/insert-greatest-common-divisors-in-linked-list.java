@@ -9,15 +9,13 @@
  * }
  */
 class Solution {
-    public int gcdfun(int val1,int val2){
-        int ans=Integer.MIN_VALUE;
-        int min=Math.min(val1,val2);
-        for(int i=1;i<=min;i++){
-            if(val1%i==0 && val2%i==0){
-                ans=Math.max(i,ans);
-            }
+    public int gcdfun(int a,int b){
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
-        return ans;
+        return a;
     }
     public ListNode insertGreatestCommonDivisors(ListNode head) {
         if(head.next==null) return head;
