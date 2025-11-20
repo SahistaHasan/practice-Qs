@@ -1,22 +1,22 @@
 class Solution {
     public String reverseWords(String s) {
-        StringBuilder main = new StringBuilder();
-        int i=s.length()-1;
-        while(i>=0){
-            StringBuilder sb = new StringBuilder();
-            while(i>=0 && ((s.charAt(i)>='a' && s.charAt(i)<='z') || (s.charAt(i)>='A' && s.charAt(i)<='Z') || (s.charAt(i)>='0' && s.charAt(i)<='9'))){
-                
-                    sb.append(s.charAt(i));
-                  
-                  i--;
-            }
-            if(sb.length()>0){
-                String str = sb.reverse().append(" ").toString();
-                main.append(str);
-            }
+       int i=s.length()-1;
+       StringBuilder ans = new StringBuilder();
+       while(i>=0){
+        StringBuilder sb = new StringBuilder();
+        while(i>=0 && s.charAt(i)!=' '){
+            sb.append(s.charAt(i));
             i--;
         }
-        main.setLength(main.length()-1);
-        return main.toString();
+        if(sb.length()>0){
+            sb.append(" ");
+            ans.append(sb.reverse());
+            
+        }
+        i--;
+       }
+      ans.deleteCharAt(0);
+      String p = ans.toString();
+      return p;
     }
 }
