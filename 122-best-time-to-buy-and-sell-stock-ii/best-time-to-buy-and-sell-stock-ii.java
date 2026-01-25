@@ -1,16 +1,22 @@
 class Solution {
+    public int solve(int index, int [] prices, int [][] dp, int buy){
+       if(index==prices.length) return 0;
+       if(dp[index][buy]!=-1) return dp[index][buy];
+       int price=0;
+       if(buy==1){
+        price=Math.max((-prices[index]+solve(index+1,prices,dp,0)),solve(index+1,prices,dp,1));
+        
+       }
+       else{
+        price=Math.max((prices[index]+solve(index+1,prices,dp,1)),solve(index+1,prices,dp,0));
+       }
+         return dp[index][buy]=price;
+    }
     public int maxProfit(int[] prices) {
-        int sum=0;
-        int sell=0;
-        for(int i=prices.length-1;i>=0;i--){
-            if(prices[i]>sell){
-                sell=prices[i];
-            }
-            else{
-                sum=sum+(sell-prices[i]);
-                sell=prices[i];
-            }
+        int [][] dp = new int[prices.length+1][2];
+        for(int i=0;i<dp.length;i++){
+            Arrays.fill(dp[i],-1);
         }
-        return sum;
+        return solve(0,prices,dp,1);
     }
 }
